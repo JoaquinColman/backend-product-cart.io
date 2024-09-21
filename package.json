@@ -1,0 +1,17 @@
+{
+  "name": "tp1-backend",
+  "version": "1.0.0",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js"
+  },
+  "keywords": [],
+  "author": "Joaquin Nathaniel Colman",
+  "license": "ISC",
+  "description": "Estamos creando un servidor con nodejs y expressjs",
+  "dependencies": {
+    "express": "^4.21.0"
+  },
+  "devDependencies": {}
+}

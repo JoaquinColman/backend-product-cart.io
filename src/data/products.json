@@ -1,0 +1,134 @@
+[
+  {
+    "id": "1",
+    "title": "ASUS ROG Strix Gaming Laptop",
+    "description": "High-performance gaming laptop with Intel Core i7 processor, 16GB RAM, and 512GB SSD.",
+    "code": "LAPTOP001",
+    "price": 2500,
+    "stock": 20,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image1.jpg",
+      "image2.jpg"
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Dell XPS 15",
+    "description": "Premium ultrabook with Intel Core i9, 32GB RAM, and 1TB SSD for ultimate productivity.",
+    "code": "LAPTOP002",
+    "price": 2200,
+    "stock": 15,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image3.jpg",
+      "image4.jpg"
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Apple MacBook Air M2",
+    "description": "Lightweight laptop with Apple M2 chip, 8GB RAM, and 256GB SSD, perfect for everyday tasks.",
+    "code": "LAPTOP003",
+    "price": 1200,
+    "stock": 30,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image5.jpg"
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Lenovo ThinkPad X1 Carbon",
+    "description": "Business laptop with Intel Core i7, 16GB RAM, 1TB SSD, and robust security features.",
+    "code": "LAPTOP004",
+    "price": 1800,
+    "stock": 10,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image6.jpg"
+    ]
+  },
+  {
+    "id": "5",
+    "title": "HP Omen 15",
+    "description": "Gaming laptop with AMD Ryzen 7, 16GB RAM, NVIDIA GTX 1660 Ti, and 512GB SSD.",
+    "code": "LAPTOP005",
+    "price": 1400,
+    "stock": 25,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image7.jpg"
+    ]
+  },
+  {
+    "id": "6",
+    "title": "MSI Prestige 14",
+    "description": "Slim laptop with Intel Core i5, 8GB RAM, and 512GB SSD, designed for creators on the go.",
+    "code": "LAPTOP006",
+    "price": 1100,
+    "stock": 18,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image8.jpg"
+    ]
+  },
+  {
+    "id": "7",
+    "title": "Acer Predator Helios 300",
+    "description": "Gaming powerhouse with Intel Core i7, 16GB RAM, NVIDIA RTX 3060, and 1TB SSD.",
+    "code": "LAPTOP007",
+    "price": 1600,
+    "stock": 22,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image9.jpg"
+    ]
+  },
+  {
+    "id": "8",
+    "title": "Razer Blade 15",
+    "description": "Ultimate gaming laptop with Intel Core i7, 32GB RAM, NVIDIA RTX 3070, and 1TB SSD.",
+    "code": "LAPTOP008",
+    "price": 2500,
+    "stock": 12,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image10.jpg"
+    ]
+  },
+  {
+    "id": "9",
+    "title": "Microsoft Surface Laptop 4",
+    "description": "Sleek laptop with AMD Ryzen 5, 16GB RAM, and 512GB SSD, perfect for both work and play.",
+    "code": "LAPTOP009",
+    "price": 1300,
+    "stock": 28,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image11.jpg"
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Alienware m15 R6",
+    "description": "High-end gaming laptop with Intel Core i9, 32GB RAM, NVIDIA RTX 3080, and 2TB SSD.",
+    "code": "LAPTOP010",
+    "price": 3000,
+    "stock": 8,
+    "category": "Computers",
+    "status": true,
+    "thumbnails": [
+      "image12.jpg"
+    ]
+  }
+]
