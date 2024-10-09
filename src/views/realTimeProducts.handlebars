@@ -1,42 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Productos en Tiempo Real</title>
     <script src="/socket.io/socket.io.js"></script>
-    <script>
-        const socket = io();
-
-        socket.on('updateProducts', (products) => {
-            const productContainer = document.getElementById('products');
-            productContainer.innerHTML = '';
-
-            products.forEach(product => {
-                const li = document.createElement('li');
-                li.innerText = `${product.title} - ${product.price} USD`;
-                productContainer.appendChild(li);
-            });
-        });
-
-        function addProduct(event) {
-            event.preventDefault();
-            const title = document.getElementById('title').value;
-            const price = document.getElementById('price').value;
-
-            socket.emit('newProduct', { title, price });
-        }
-    </script>
 </head>
 <body>
     <h1>Lista de Productos en Tiempo Real</h1>
-    <ul id="products"></ul>
 
-    <h2>Agregar Producto</h2>
-    <form onsubmit="addProduct(event)">
+   
+    <div id="productsContainer">   
+    </div>
+
+    
+    <h2>Agregar Nuevo Producto</h2>
+    <form id="addProductForm">
         <input type="text" id="title" placeholder="Título" required>
+        <input type="text" id="description" placeholder="Descripción" required>
+        <input type="text" id="code" placeholder="Código" required>
         <input type="number" id="price" placeholder="Precio" required>
+        <input type="number" id="stock" placeholder="Stock" required>
+        <input type="text" id="category" placeholder="Categoría" required>
         <button type="submit">Agregar Producto</button>
     </form>
+
+    <script>
+        
+        const socket = io();
+
+        
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch('/api/products');
+                if (response.ok) {
+                    const products = await response.json();
+                    renderProducts(products);
+                } else {
+                    console.error('Error al cargar los productos');
+                }
+            } catch (error) {
+                console.error('Error al realizar la petición:', error);
+            }
+        });
+
+        
+        document.getElementById('addProductForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const productData = {
+                title: document.getElementById('title').value,
+                description: document.getElementById('description').value,
+                code: document.getElementById('code').value,
+                price: parseFloat(document.getElementById('price').value),
+                stock: parseInt(document.getElementById('stock').value, 10),
+                category: document.getElementById('category').value
+            };
+            socket.emit('createProduct', productData);
+        });
+
+        
+        socket.on('updateProducts', (products) => {
+            renderProducts(products);
+        });
+
+        
+        function deleteProduct(productId) {
+            socket.emit('deleteProduct', productId);
+        }
+
+        
+        function renderProducts(products) {
+            const productContainer = document.getElementById('productsContainer');
+            productContainer.innerHTML = '';
+            products.forEach(product => {
+                const productElement = document.createElement('div');
+                productElement.innerHTML = `
+                    <h3>${product.title}</h3>
+                    <p>${product.description}</p>
+                    <p>Precio: $${product.price}</p>
+                    <p>Stock: ${product.stock}</p>
+                    <button onclick="deleteProduct('${product.id}')">Eliminar</button>
+                `;
+                productContainer.appendChild(productElement);
+            });
+        }
+    </script>
 </body>
 </html>
+

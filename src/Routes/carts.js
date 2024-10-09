@@ -2,8 +2,6 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs').promises;
 const path = require('path');
-
-
 const cartsFilePath = path.join(__dirname, '..', 'data', 'carts.json');
 const productsFilePath = path.join(__dirname, '..', 'data', 'products.json');
 
