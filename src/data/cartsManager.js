@@ -1,37 +1,35 @@
-const fs = require('fs').promises;
-const path = require('path');
 
-const cartsFilePath = path.join(__dirname, 'carts.json');
+const Cart = require('../models/cart');  
 
-let carts = [];
 
 const loadCarts = async () => {
   try {
-    const data = await fs.readFile(cartsFilePath, 'utf-8');
-    carts = JSON.parse(data);
+    return await Cart.find().populate('products.product');  
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      carts = [];
-      await saveCarts();
-    } else {
-      console.error('Error al leer carts.json:', error);
-    }
+    console.error('Error al obtener carritos desde MongoDB:', error);
+    throw error;
   }
 };
 
-const saveCarts = async () => {
+
+const saveCart = async (cart) => {
   try {
-    await fs.writeFile(cartsFilePath, JSON.stringify(carts, null, 2));
+    return await cart.save();  
   } catch (error) {
-    console.error('Error al escribir en carts.json:', error);
+    console.error('Error al guardar carrito en MongoDB:', error);
+    throw error;
   }
 };
 
 
-loadCarts();
+const createCart = async () => {
+  const newCart = new Cart({ products: [] }); 
+  return await saveCart(newCart);
+};
 
 module.exports = {
-  carts,
   loadCarts,
-  saveCarts
+  saveCart,
+  createCart
 };
+

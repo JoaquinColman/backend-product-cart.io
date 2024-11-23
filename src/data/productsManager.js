@@ -1,30 +1,19 @@
-const fs = require('fs').promises;
-const path = require('path');
-
-
-const productsFilePath = path.join(__dirname, '../data/products.json');
-
+const Product = require('../models/product');
 
 const loadProducts = async () => {
   try {
-    const data = await fs.readFile(productsFilePath, 'utf-8');
-    return JSON.parse(data);
+    return await Product.find(); 
   } catch (error) {
-    if (error.code === 'ENOENT') {
-      console.error('Archivo products.json no encontrado.');
-      return [];
-    } else {
-      console.error('Error al leer products.json:', error);
-      throw error;
-    }
+    console.error('Error al obtener productos desde MongoDB:', error);
+    throw error;
   }
 };
 
 const saveProducts = async (products) => {
   try {
-    await fs.writeFile(productsFilePath, JSON.stringify(products, null, 2));
+    
   } catch (error) {
-    console.error('Error al escribir en products.json:', error);
+    console.error('Error al guardar productos en MongoDB:', error);
   }
 };
 

@@ -1,90 +1,20 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos en Tiempo Real</title>
-    <script src="/socket.io/socket.io.js"></script>
-</head>
-<body>
-    <h1>Lista de Productos en Tiempo Real</h1>
+{{#each products}}
+  <div class="product-card">
+    <img src="{{this.thumbnails}}" alt="{{this.title}}">
+    <h3>{{this.title}}</h3>
+    <p>{{this.description}}</p>
+    <p>${{this.price}}</p>
+    <button onclick="addToCart('{{this.id}}')">Agregar al carrito</button>
+  </div>
+{{/each}}
 
-   
-    <div id="productsContainer">   
-    </div>
 
-    
-    <h2>Agregar Nuevo Producto</h2>
-    <form id="addProductForm">
-        <input type="text" id="title" placeholder="Título" required>
-        <input type="text" id="description" placeholder="Descripción" required>
-        <input type="text" id="code" placeholder="Código" required>
-        <input type="number" id="price" placeholder="Precio" required>
-        <input type="number" id="stock" placeholder="Stock" required>
-        <input type="text" id="category" placeholder="Categoría" required>
-        <button type="submit">Agregar Producto</button>
-    </form>
-
-    <script>
-        
-        const socket = io();
-
-        
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                const response = await fetch('/api/products');
-                if (response.ok) {
-                    const products = await response.json();
-                    renderProducts(products);
-                } else {
-                    console.error('Error al cargar los productos');
-                }
-            } catch (error) {
-                console.error('Error al realizar la petición:', error);
-            }
-        });
-
-        
-        document.getElementById('addProductForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const productData = {
-                title: document.getElementById('title').value,
-                description: document.getElementById('description').value,
-                code: document.getElementById('code').value,
-                price: parseFloat(document.getElementById('price').value),
-                stock: parseInt(document.getElementById('stock').value, 10),
-                category: document.getElementById('category').value
-            };
-            socket.emit('createProduct', productData);
-        });
-
-        
-        socket.on('updateProducts', (products) => {
-            renderProducts(products);
-        });
-
-        
-        function deleteProduct(productId) {
-            socket.emit('deleteProduct', productId);
-        }
-
-        
-        function renderProducts(products) {
-            const productContainer = document.getElementById('productsContainer');
-            productContainer.innerHTML = '';
-            products.forEach(product => {
-                const productElement = document.createElement('div');
-                productElement.innerHTML = `
-                    <h3>${product.title}</h3>
-                    <p>${product.description}</p>
-                    <p>Precio: $${product.price}</p>
-                    <p>Stock: ${product.stock}</p>
-                    <button onclick="deleteProduct('${product.id}')">Eliminar</button>
-                `;
-                productContainer.appendChild(productElement);
-            });
-        }
-    </script>
-</body>
-</html>
-
+<div class="pagination">
+  {{#if prevPage}}
+    <a href="/products?page={{prevPage}}">Página Anterior</a>
+  {{/if}}
+  <span>Página {{page}} de {{totalPages}}</span>
+  {{#if nextPage}}
+    <a href="/products?page={{nextPage}}">Página Siguiente</a>
+  {{/if}}
+</div>
